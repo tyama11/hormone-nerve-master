@@ -119,11 +119,11 @@ function syncMute(): void {
 
 function updateTabScores(): void {
     [['hormone', els.tabScore1], ['nerve', els.tabScore2]].forEach(([c, el]) => {
-        const s = progress.getOniBest(keyFor(c as Category));
+        const s = progress.getOniBest(c as Category);
         if (s !== null) { (el as HTMLElement).textContent = `👹 ${s}問`; (el as HTMLElement).hidden = false; }
         else (el as HTMLElement).hidden = true;
     });
-    const saved = progress.getOniBest(keyFor(state.category));
+    const saved = progress.getOniBest(state.category);
     if (saved === null) { els.earnedTitleBanner.hidden = true; return; }
     const r = getOniRankInfo(saved);
     els.earnedTitleBanner.className = `earned-title-banner ${r.className}`;
@@ -139,15 +139,50 @@ function setCategory(cat: Category): void {
         tab.setAttribute('aria-selected', String(a));
     });
     els.homeDesc.textContent = CATEGORY_CONFIG[cat].description;
-    const unlocked = progress.isOniUnlocked(keyFor(cat));
+    const unlocked = progress.isOniUnlocked(cat);
     els.ruleOniItem.hidden = !unlocked;
     els.btnOni.hidden = !unlocked;
     updateTabScores();
 }
 
+function renderBoardBackdropSvg(cat: Category): string {
+    if (cat === 'hormone') {
+        return `<g class="board-backdrop" opacity="0.6">
+            <!-- Top container: 血糖値を上げるホルモン（3つ） ↑ -->
+            <rect x="50" y="40" width="700" height="95" rx="16" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#15803D">血糖値を上げるホルモン（3つ） ↑</text>
+            <path d="M400 135 L400 165" stroke="#15803D" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Center container: 血糖値を下げる唯一のホルモン ↓ -->
+            <rect x="50" y="170" width="700" height="95" rx="16" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="400" y="200" text-anchor="middle" font-size="14" font-weight="700" fill="#B91C1C">血糖値を下げる唯一のホルモン ↓</text>
+            <path d="M400 265 L400 295" stroke="#B91C1C" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Bottom container: 体液（水・塩分）・代謝を調節するホルモン -->
+            <rect x="50" y="300" width="700" height="95" rx="16" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="400" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="#1D4ED8">体液（水・塩分）・代謝を調節するホルモン</text>
+        </g>`;
+    } else {
+        return `<g class="board-backdrop" opacity="0.6">
+            <!-- Autonomic balance -->
+            <rect x="50" y="40" width="330" height="150" rx="16" fill="#FDF4FF" stroke="#F0ABFC" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="215" y="75" text-anchor="middle" font-size="14" font-weight="700" fill="#A21CAF">交感神経 ⇔ 副交感神経</text>
+
+            <!-- Comparison frame -->
+            <rect x="420" y="40" width="330" height="150" rx="16" fill="#FFFBEB" stroke="#FDE047" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="585" y="75" text-anchor="middle" font-size="14" font-weight="700" fill="#A16207">神経系 vs 内分泌系</text>
+
+            <!-- Target cell container -->
+            <rect x="50" y="220" width="700" height="120" rx="16" fill="#F0FDFA" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="400" y="255" text-anchor="middle" font-size="14" font-weight="700" fill="#0F766E">標的細胞 / 受容体 と 情報伝達</text>
+        </g>`;
+    }
+}
+
 function renderBoardSvg(oniBlankStageId: string | null): void {
     const items = getItemsForCategory(state.category);
-    els.boardSvg.innerHTML = items.map((s) => {
+    const backdrop = renderBoardBackdropSvg(state.category);
+    const nodes = items.map((s) => {
         const isBlank = oniBlankStageId !== null ? s.stageId === oniBlankStageId : true;
         const cls = oniBlankStageId !== null
             ? (isBlank ? 'stage-node oni-target-blank interactive-target' : 'stage-node solved')
@@ -161,6 +196,36 @@ function renderBoardSvg(oniBlankStageId: string | null): void {
             </g>
         </g>`;
     }).join('');
+    els.boardSvg.innerHTML = `<defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/></marker></defs>${backdrop}${nodes}`;
+}
+
+function updateComboBadge(): void {
+    if (state.difficulty === 'oni' && state.combo >= 2) {
+        els.comboBadge.textContent = `${state.combo} 連続正解！`;
+        els.comboBadge.classList.add('show');
+    } else {
+        els.comboBadge.classList.remove('show');
+    }
+}
+
+function triggerErrorShake(el: HTMLElement): void {
+    el.classList.add('error-shake');
+    setTimeout(() => el.classList.remove('error-shake'), 400);
+}
+
+function createConfetti(): void {
+    const container = document.body;
+    for (let i = 0; i < 40; i++) {
+        const conf = document.createElement('div');
+        conf.className = 'confetti-piece';
+        conf.style.left = `${Math.random() * 100}vw`;
+        conf.style.top = `-20px`;
+        conf.style.backgroundColor = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'][Math.floor(Math.random() * 5)]!;
+        conf.style.transform = `rotate(${Math.random() * 360}deg)`;
+        conf.style.animation = `confetti-fall ${1 + Math.random() * 1.5}s linear forwards`;
+        container.appendChild(conf);
+        setTimeout(() => conf.remove(), 2500);
+    }
 }
 
 function startGame(difficulty: Difficulty): void {
@@ -237,11 +302,14 @@ function renderCards(): void {
             if (isOni) {
                 if (item.stageId === state.currentOniStageId) {
                     state.score++; state.combo++; state.maxCombo = Math.max(state.maxCombo, state.combo);
+                    updateComboBadge();
                     if (isBonusCombo(state.combo)) { state.oniEndTime += ONI_BONUS_SECONDS * 1000; SOUND_FX.playBonus(); showToast(`🔥 ${state.combo}連続！ +3秒！`); }
                     else { SOUND_FX.playCorrect(state.combo); showToast('⭕ 正解！'); }
+                    if (state.score > 0) createConfetti();
                     updateOniHud(); nextOni();
                 } else {
-                    state.combo = 0; SOUND_FX.playWrong(); state.oniEndTime -= ONI_PENALTY_SECONDS * 1000;
+                    state.combo = 0; updateComboBadge(); SOUND_FX.playWrong(); state.oniEndTime -= ONI_PENALTY_SECONDS * 1000;
+                    triggerErrorShake(card);
                     showToast(`❌ ミス！ -${ONI_PENALTY_SECONDS}秒`);
                     const rem = Math.max(0, state.oniEndTime - Date.now());
                     if (rem <= 0) { stopTimers(); handleOniTimeUp(); } else { updateOniHud(rem); nextOni(); }
@@ -275,9 +343,14 @@ function attemptPlace(stageId: string): void {
         state.selectedItemId = null;
         els.progressFill.style.width = `${(state.score / state.totalQuestions) * 100}%`;
         renderCards();
-        if (state.score >= state.totalQuestions) handleGameClear();
+        if (state.score >= state.totalQuestions) {
+            createConfetti();
+            handleGameClear();
+        }
     } else {
         SOUND_FX.playWrong();
+        const node = els.boardSvg.querySelector<SVGGElement>(`[data-stage="${stageId}"]`);
+        if (node) triggerErrorShake(node);
         showToast('❌ 違うみたい…');
         state.selectedItemId = null;
         renderCards();

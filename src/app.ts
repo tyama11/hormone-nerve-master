@@ -146,33 +146,37 @@ function setCategory(cat: Category): void {
 function renderBoardBackdropSvg(cat: Category): string {
     if (cat === 'hormone') {
         return `<g class="board-backdrop" opacity="0.6">
-            <!-- Top container: 血糖値を上げるホルモン（3つ） ↑ -->
-            <rect x="50" y="40" width="700" height="95" rx="16" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#15803D">血糖値を上げるホルモン（3つ） ↑</text>
-            <path d="M400 135 L400 165" stroke="#15803D" stroke-width="2" marker-end="url(#arrow)" />
+            <!-- Top panel: 血糖値を上げるホルモン（3つ） ↑ -->
+            <rect x="16" y="10" width="668" height="180" rx="16" fill="#F0FDF4" stroke="#86EFAC" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="350" y="38" text-anchor="middle" font-size="14" font-weight="700" fill="#15803D">血糖値を上げるホルモン（3つ） ↑</text>
+            <path d="M350 145 L350 175" stroke="#15803D" stroke-width="2" marker-end="url(#arrow)" />
 
-            <!-- Center container: 血糖値を下げる唯一のホルモン ↓ -->
-            <rect x="50" y="170" width="700" height="95" rx="16" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="400" y="200" text-anchor="middle" font-size="14" font-weight="700" fill="#B91C1C">血糖値を下げる唯一のホルモン ↓</text>
-            <path d="M400 265 L400 295" stroke="#B91C1C" stroke-width="2" marker-end="url(#arrow)" />
+            <!-- Middle panel: 血糖値を下げる唯一のホルモン ↓ -->
+            <rect x="16" y="200" width="668" height="125" rx="16" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="350" y="225" text-anchor="middle" font-size="14" font-weight="700" fill="#B91C1C">血糖値を下げる唯一のホルモン ↓</text>
+            <path d="M350 280 L350 310" stroke="#B91C1C" stroke-width="2" marker-end="url(#arrow)" />
 
-            <!-- Bottom container: 体液（水・塩分）・代謝を調節するホルモン -->
-            <rect x="50" y="300" width="700" height="95" rx="16" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="400" y="330" text-anchor="middle" font-size="14" font-weight="700" fill="#1D4ED8">体液（水・塩分）・代謝を調節するホルモン</text>
+            <!-- Bottom panel: 体液（水・塩分）・代謝調節とフィードバック -->
+            <rect x="16" y="335" width="668" height="190" rx="16" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="350" y="360" text-anchor="middle" font-size="14" font-weight="700" fill="#1D4ED8">体液（水・塩分）・代謝調節とフィードバック</text>
         </g>`;
     } else {
         return `<g class="board-backdrop" opacity="0.6">
-            <!-- Autonomic balance -->
-            <rect x="50" y="40" width="330" height="150" rx="16" fill="#FDF4FF" stroke="#F0ABFC" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="215" y="75" text-anchor="middle" font-size="14" font-weight="700" fill="#A21CAF">交感神経 ⇔ 副交感神経</text>
+            <!-- Top-left: 交感神経 -->
+            <rect x="16" y="10" width="325" height="175" rx="16" fill="#FDF4FF" stroke="#F0ABFC" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="178" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#A21CAF">交感神経 ⇔ 副交感神経</text>
 
-            <!-- Comparison frame -->
-            <rect x="420" y="40" width="330" height="150" rx="16" fill="#FFFBEB" stroke="#FDE047" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="585" y="75" text-anchor="middle" font-size="14" font-weight="700" fill="#A16207">神経系 vs 内分泌系</text>
+            <!-- Top-right: 副交感神経バランス -->
+            <rect x="359" y="10" width="325" height="175" rx="16" fill="#FDF4FF" stroke="#F0ABFC" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="521" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#A21CAF">自律神経の拮抗作用</text>
 
-            <!-- Target cell container -->
-            <rect x="50" y="220" width="700" height="120" rx="16" fill="#F0FDFA" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="6,4" />
-            <text x="400" y="255" text-anchor="middle" font-size="14" font-weight="700" fill="#0F766E">標的細胞 / 受容体 と 情報伝達</text>
+            <!-- Middle: 神経系 vs 内分泌系 比較 -->
+            <rect x="16" y="195" width="668" height="150" rx="16" fill="#FFFBEB" stroke="#FDE047" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="350" y="222" text-anchor="middle" font-size="14" font-weight="700" fill="#A16207">神経系 vs 内分泌系 比較</text>
+
+            <!-- Bottom: 標的細胞・受容体（鍵と鍵穴） -->
+            <rect x="16" y="355" width="668" height="170" rx="16" fill="#F0FDFA" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="6,4" />
+            <text x="350" y="382" text-anchor="middle" font-size="14" font-weight="700" fill="#0F766E">標的細胞・受容体（鍵と鍵穴）</text>
         </g>`;
     }
 }
@@ -180,17 +184,51 @@ function renderBoardBackdropSvg(cat: Category): string {
 function renderBoardSvg(oniBlankStageId: string | null): void {
     const items = getItemsForCategory(state.category);
     const backdrop = renderBoardBackdropSvg(state.category);
+    const isEasy = state.difficulty === 'easy';
+    const isOni = state.difficulty === 'oni';
+
+    // Count numbered blanks for normal mode
+    let blankIndex = 0;
+
     const nodes = items.map((s) => {
-        const isBlank = oniBlankStageId !== null ? s.stageId === oniBlankStageId : true;
-        const cls = oniBlankStageId !== null
-            ? (isBlank ? 'stage-node oni-target-blank interactive-target' : 'stage-node solved')
-            : 'stage-node interactive-target masked';
-        const txt = oniBlankStageId !== null ? (isBlank ? '？' : s.name) : '？';
+        const isTargetBlank = oniBlankStageId !== null ? s.stageId === oniBlankStageId : true;
+        let cls = 'stage-node';
+        let txt = '';
+        let showBoxLabel = true;
+
+        if (oniBlankStageId !== null) {
+            // Oni mode
+            if (isTargetBlank) {
+                cls += ' oni-target-blank interactive-target';
+                txt = '？';
+                showBoxLabel = false; // hide boxLabel on target blank
+            } else {
+                cls += ' solved';
+                txt = s.name;
+            }
+        } else {
+            // Standard mode (easy / normal)
+            if (isEasy) {
+                cls += ' interactive-target masked';
+                txt = '？';
+                showBoxLabel = true;
+            } else {
+                // Normal mode
+                blankIndex++;
+                cls += ' interactive-target masked';
+                txt = `【 ${blankIndex} 】`;
+                showBoxLabel = false; // hide s.boxLabel on normal unfilled boxes
+            }
+        }
+
+        const boxLabelSvg = showBoxLabel ? `<text x="0" y="-14" text-anchor="middle" font-size="12" font-weight="700" fill="#5B6E82">${s.boxLabel}</text>` : '';
+        const yOffset = showBoxLabel ? '14' : '4';
+
         return `<g class="${cls}" data-stage="${s.stageId}" tabindex="0" role="button" transform="translate(${s.x}, ${s.y})">
             <g class="stage-visual">
-                <rect class="stage-box ${isBlank && oniBlankStageId ? 'oni-focus-box' : ''}" x="-92" y="-38" width="184" height="76" rx="16" fill="#FFFFFF" stroke="#6F7977" stroke-width="2.5" />
-                <text x="0" y="-14" text-anchor="middle" font-size="12" font-weight="700" fill="#5B6E82">${s.boxLabel}</text>
-                <text class="stage-label" x="0" y="14" text-anchor="middle" font-size="16" font-weight="800" fill="#161D1C">${txt}</text>
+                <rect class="stage-box ${isTargetBlank && oniBlankStageId ? 'oni-focus-box' : ''}" x="-92" y="-38" width="184" height="76" rx="16" fill="#FFFFFF" stroke="#6F7977" stroke-width="2.5" />
+                ${boxLabelSvg}
+                <text class="stage-label" x="0" y="${yOffset}" text-anchor="middle" font-size="15" font-weight="800" fill="#161D1C">${txt}</text>
             </g>
         </g>`;
     }).join('');

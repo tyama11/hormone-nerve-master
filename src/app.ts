@@ -348,7 +348,7 @@ function attemptPlace(stageId: string): void {
     } else {
         SOUND_FX.playWrong();
         const node = els.boardSvg.querySelector<SVGGElement>(`[data-stage="${stageId}"]`);
-        if (node) triggerErrorShake(node);
+        if (node) triggerErrorShake(els.mainArea);
         showToast('❌ 違うみたい…');
         state.selectedItemId = null;
         renderCards();

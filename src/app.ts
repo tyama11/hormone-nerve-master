@@ -67,8 +67,6 @@ const els = {
     overlayHomeBtn: byId<HTMLButtonElement>('overlay-home-btn')
 };
 
-function keyFor(cat: Category): 'cycle' | 'sketch' { return cat === 'hormone' ? 'cycle' : 'sketch'; }
-
 function init(): void {
     els.categoryTabs.forEach((tab) => tab.addEventListener('click', () => {
         SOUND_FX.playTap();
@@ -374,7 +372,7 @@ function showToast(msg: string): void {
 function handleGameClear(): void {
     state.isPlaying = false;
     let unlockedNow = false;
-    const k = keyFor(state.category);
+    const k = state.category;
     if (state.difficulty === 'normal' && !progress.isOniUnlocked(k)) {
         progress.unlockOni(k); state.justUnlockedOni = true; unlockedNow = true;
     }
@@ -388,7 +386,7 @@ function handleGameClear(): void {
 
 function handleOniTimeUp(): void {
     state.isPlaying = false;
-    const k = keyFor(state.category);
+    const k = state.category;
     const prev = progress.getOniBest(k) ?? -1;
     const best = Math.max(prev, state.score);
     if (state.score > prev) progress.setOniBest(k, best);

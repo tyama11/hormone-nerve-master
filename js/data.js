@@ -1,21 +1,21 @@
                                                                             
 
 export const TAB1_ITEMS                       = [
-    { stageId: 'h1', name: 'グルカゴン', emoji: '📈', hint: 'すい臓A細胞から分泌・グリコーゲンを分解し血糖上昇', x: 140, y: 115, boxLabel: '血糖上昇①' },
-    { stageId: 'h2', name: 'アドレナリン', emoji: '⚡', hint: '副腎髄質から分泌・グリコーゲンを分解し血糖上昇', x: 350, y: 115, boxLabel: '血糖上昇②' },
-    { stageId: 'h3', name: '糖質コルチコイド', emoji: '🥩', hint: '副腎皮質から分泌・糖新生で血糖上昇', x: 560, y: 115, boxLabel: '血糖上昇③' },
-    { stageId: 'h4', name: 'インスリン', emoji: '📉', hint: 'すい臓B細胞から分泌・血糖値を下げる唯一のホルモン', x: 350, y: 265, boxLabel: '血糖低下（唯一）' },
-    { stageId: 'h5', name: 'バソプレシン', emoji: '💧', hint: '脳下垂体後葉・腎臓での水の再吸収を促進', x: 140, y: 415, boxLabel: '水の再吸収' },
-    { stageId: 'h6', name: '鉱質コルチコイド', emoji: '🧂', hint: '副腎皮質・ナトリウムイオンの再吸収を促進', x: 350, y: 415, boxLabel: '塩分の再吸収' },
-    { stageId: 'h7', name: 'チロキシン', emoji: '🔥', hint: '甲状腺から分泌・全身の代謝を活性化', x: 560, y: 415, boxLabel: '代謝活性' }
+    { stageId: 'h1', name: 'グルカゴン', emoji: '📈', hint: 'すい臓A細胞から分泌・グリコーゲンを分解し血糖上昇', x: 125, y: 118, boxLabel: '血糖上昇①' },
+    { stageId: 'h2', name: 'アドレナリン', emoji: '⚡', hint: '副腎髄質から分泌・グリコーゲンを分解し血糖上昇', x: 350, y: 118, boxLabel: '血糖上昇②' },
+    { stageId: 'h3', name: '糖質コルチコイド', emoji: '🥩', hint: '副腎皮質から分泌・糖新生で血糖上昇', x: 575, y: 118, boxLabel: '血糖上昇③' },
+    { stageId: 'h4', name: 'インスリン', emoji: '📉', hint: 'すい臓B細胞から分泌・血糖値を下げる唯一のホルモン', x: 350, y: 273, boxLabel: '血糖低下（唯一）' },
+    { stageId: 'h5', name: 'バソプレシン', emoji: '💧', hint: '脳下垂体後葉・腎臓での水の再吸収を促進', x: 125, y: 464, boxLabel: '水の再吸収' },
+    { stageId: 'h6', name: '鉱質コルチコイド', emoji: '🧂', hint: '副腎皮質・ナトリウムイオンの再吸収を促進', x: 350, y: 464, boxLabel: '塩分の再吸収' },
+    { stageId: 'h7', name: 'チロキシン', emoji: '🔥', hint: '甲状腺から分泌・全身の代謝を活性化', x: 575, y: 464, boxLabel: '代謝活性' }
 ];
 
 export const TAB2_ITEMS                       = [
-    { stageId: 'v1', name: '交感神経', emoji: '🦁', hint: '闘争と逃走（心拍増加・瞳孔拡大）', x: 175, y: 115, boxLabel: '活動時' },
-    { stageId: 'v2', name: '副交感神経', emoji: '🍵', hint: 'リラックス（消化管促進・心拍減少）', x: 525, y: 115, boxLabel: '休息時' },
-    { stageId: 'v3', name: '電気信号＋伝達物質', emoji: '⚡', hint: '神経系の情報伝達物質', x: 175, y: 270, boxLabel: '神経の伝達' },
-    { stageId: 'v4', name: 'ホルモン（血液）', emoji: '🩸', hint: '内分泌系の伝達物質と経路（分〜時間単位）', x: 525, y: 270, boxLabel: 'ホルモンの伝達' },
-    { stageId: 'v5', name: '標的細胞・受容体', emoji: '🔑', hint: '特定のホルモンと鍵と鍵穴の関係で結合', x: 350, y: 420, boxLabel: '作用する相手' }
+    { stageId: 'v1', name: '交感神経', emoji: '🦁', hint: '闘争と逃走（心拍増加・瞳孔拡大）', x: 185, y: 116, boxLabel: '活動時' },
+    { stageId: 'v2', name: '副交感神経', emoji: '🍵', hint: 'リラックス（消化管促進・心拍減少）', x: 515, y: 116, boxLabel: '休息時' },
+    { stageId: 'v3', name: '電気信号＋伝達物質', emoji: '⚡', hint: '神経系の情報伝達物質', x: 185, y: 290, boxLabel: '神経の伝達' },
+    { stageId: 'v4', name: 'ホルモン（血液）', emoji: '🩸', hint: '内分泌系の伝達物質と経路（分〜時間単位）', x: 515, y: 290, boxLabel: 'ホルモンの伝達' },
+    { stageId: 'v5', name: '標的細胞・受容体', emoji: '🔑', hint: '特定のホルモンと鍵と鍵穴の関係で結合', x: 350, y: 458, boxLabel: '作用する相手' }
 ];
 
 export const CATEGORY_CONFIG                                                                                        = {
